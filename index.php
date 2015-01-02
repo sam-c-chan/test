@@ -81,22 +81,26 @@ while($row = mysqli_fetch_array($result)){
 	echo "first name: ". $row['firstname']."\r\n";
 }
 
-$prepare = mysqli_prepare($conn, "insert into MyGuests (firstname, lastname, email) values (?,?,?);");
-mysqli_stmt_bind_param($prepare, 'sss', $firstname, $lastname, $email);
+date_default_timezone_set('America/Los_Angeles');
 
-$firstname = 'Tammy';
-$lastname = 'h';
-$email = 'tammyh@abc.com';
+$prepare = mysqli_prepare($conn, "insert into MyGuests (firstname, lastname, email, reg_date) values (?,?,?,?);");
+mysqli_stmt_bind_param($prepare, 'ssss', $firstname, $lastname, $email, $time);
+
+$firstname = 'lemarcus';
+$lastname = 'alridge';
+$email = 'LA@abc.com';
+$time = date('Y-m-d G:i:s');
 mysqli_stmt_execute($prepare);
 
 echo "row inserted!\r\n";
 
-$firstname = 'Yuki';
-$lastname = 'i';
-$email = 'Yukii@abc.com';
+/*$firstname = 'pau';
+$lastname = 'gasol';
+$email = 'pg@abc.com';
+$time = date_format(date_create(), 'U = Y-m-d H:i:s');
 mysqli_stmt_execute($prepare);
 
-echo "row inserted!\r\n";
+echo "row inserted!\r\n";*/
 
 mysqli_stmt_close($prepare);
 
